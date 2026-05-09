@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://yu-3.gitee.io/sitemap.xml
+Sitemap: https://yu-7.github.io/sitemap.xml
