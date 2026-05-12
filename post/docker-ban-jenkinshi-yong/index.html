@@ -27,26 +27,26 @@
 
 
   <meta name="generator" content="Gridea Pro 1.1.1">
-  <title>Docker本地挂载目录转容器卷 | Gridea Pro</title>
+  <title>Docker 版 Jenkins使用 | Gridea Pro</title>
   
-<meta property="og:title" content="Docker本地挂载目录转容器卷" />
+<meta property="og:title" content="Docker 版 Jenkins使用" />
 <meta property="og:type" content="article" />
 
 
-<meta name="description" content="之前选择数据挂载的方式都是本地目录直接挂载，但是后面出现了一下文件权限问题，而且本地挂载的话填写挂载路径非常的不灵活，虽然有.env 文件可以填入基础挂载路径，但是还是没有 Docker 自带的容器卷方便，容器卷有个确定就是不能单独挂载文件，只能是目录挂载，而且修改容器卷里面的内容比较麻烦，目前只有官方的 Docker desktop 才能修改容器卷的内容。因此大部分的情况你都可以直接让 Dock&amp;hellip;">
-<link rel="canonical" href="https://yu-7.github.io/post/dockerben-di-gua-zai-mu-lu-zhuan-rong-qi-juan/">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Docker本地挂载目录转容器卷","url":"https://yu-7.github.io/post/dockerben-di-gua-zai-mu-lu-zhuan-rong-qi-juan/","description":"之前选择数据挂载的方式都是本地目录直接挂载，但是后面出现了一下文件权限问题，而且本地挂载的话填写挂载路径非常的不灵活，虽然有.env 文件可以填入基础挂载路径，但是还是没有 Docker 自带的容器卷方便，容器卷有个确定就是不能单独挂载文件，只能是目录挂载，而且修改容器卷里面的内容比较麻烦，目前只有官方的 Docker desktop 才能修改容器卷的内容。因此大部分的情况你都可以直接让 Dock\u0026hellip;","datePublished":"2026-05-09T11:50:00+08:00","dateModified":"2026-05-09T14:59:39+08:00","author":{"@type":"Person","name":"Gridea Pro"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/images/avatar.png"},"name":"Gridea Pro"}}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://yu-7.github.io","name":"Gridea Pro","position":1},{"@type":"ListItem","item":"https://yu-7.github.io/post/dockerben-di-gua-zai-mu-lu-zhuan-rong-qi-juan/","name":"Docker本地挂载目录转容器卷","position":2}]}</script>
-<meta property="og:title" content="Docker本地挂载目录转容器卷">
-<meta property="og:description" content="之前选择数据挂载的方式都是本地目录直接挂载，但是后面出现了一下文件权限问题，而且本地挂载的话填写挂载路径非常的不灵活，虽然有.env 文件可以填入基础挂载路径，但是还是没有 Docker 自带的容器卷方便，容器卷有个确定就是不能单独挂载文件，只能是目录挂载，而且修改容器卷里面的内容比较麻烦，目前只有官方的 Docker desktop 才能修改容器卷的内容。因此大部分的情况你都可以直接让 Dock&amp;hellip;">
-<meta property="og:url" content="https://yu-7.github.io/post/dockerben-di-gua-zai-mu-lu-zhuan-rong-qi-juan/">
+<meta name="description" content="Jenkins 是一个非常强大的软件方便部署，之前很少用到，现在我要区分开发环境和测试环境，也只需要用到很少一部分 Jenkins 功能。 先把 vue 的前端项目从 gitee 上拉取过来（需要安装 gitee 插件）自动打包好（需要有 node 环境），然后通过 publish over ssh 部署到物理机上，用 nginx 做代理（在 Jenkins docker 做代理非常的麻烦）。 #&amp;hellip;">
+<link rel="canonical" href="https://yu-7.github.io/post/docker-ban-jenkinshi-yong/">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Docker 版 Jenkins使用","url":"https://yu-7.github.io/post/docker-ban-jenkinshi-yong/","description":"Jenkins 是一个非常强大的软件方便部署，之前很少用到，现在我要区分开发环境和测试环境，也只需要用到很少一部分 Jenkins 功能。 先把 vue 的前端项目从 gitee 上拉取过来（需要安装 gitee 插件）自动打包好（需要有 node 环境），然后通过 publish over ssh 部署到物理机上，用 nginx 做代理（在 Jenkins docker 做代理非常的麻烦）。 #\u0026hellip;","datePublished":"2026-05-11T10:17:44+08:00","dateModified":"2026-05-11T10:49:41+08:00","author":{"@type":"Person","name":"Gridea Pro"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/images/avatar.png"},"name":"Gridea Pro"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://yu-7.github.io","name":"Gridea Pro","position":1},{"@type":"ListItem","item":"https://yu-7.github.io/post/docker-ban-jenkinshi-yong/","name":"Docker 版 Jenkins使用","position":2}]}</script>
+<meta property="og:title" content="Docker 版 Jenkins使用">
+<meta property="og:description" content="Jenkins 是一个非常强大的软件方便部署，之前很少用到，现在我要区分开发环境和测试环境，也只需要用到很少一部分 Jenkins 功能。 先把 vue 的前端项目从 gitee 上拉取过来（需要安装 gitee 插件）自动打包好（需要有 node 环境），然后通过 publish over ssh 部署到物理机上，用 nginx 做代理（在 Jenkins docker 做代理非常的麻烦）。 #&amp;hellip;">
+<meta property="og:url" content="https://yu-7.github.io/post/docker-ban-jenkinshi-yong/">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Gridea Pro">
 <meta property="og:image" content="/images/avatar.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:url" content="https://yu-7.github.io/post/dockerben-di-gua-zai-mu-lu-zhuan-rong-qi-juan/">
-<meta name="twitter:title" content="Docker本地挂载目录转容器卷">
-<meta name="twitter:description" content="之前选择数据挂载的方式都是本地目录直接挂载，但是后面出现了一下文件权限问题，而且本地挂载的话填写挂载路径非常的不灵活，虽然有.env 文件可以填入基础挂载路径，但是还是没有 Docker 自带的容器卷方便，容器卷有个确定就是不能单独挂载文件，只能是目录挂载，而且修改容器卷里面的内容比较麻烦，目前只有官方的 Docker desktop 才能修改容器卷的内容。因此大部分的情况你都可以直接让 Dock&amp;hellip;">
+<meta name="twitter:url" content="https://yu-7.github.io/post/docker-ban-jenkinshi-yong/">
+<meta name="twitter:title" content="Docker 版 Jenkins使用">
+<meta name="twitter:description" content="Jenkins 是一个非常强大的软件方便部署，之前很少用到，现在我要区分开发环境和测试环境，也只需要用到很少一部分 Jenkins 功能。 先把 vue 的前端项目从 gitee 上拉取过来（需要安装 gitee 插件）自动打包好（需要有 node 环境），然后通过 publish over ssh 部署到物理机上，用 nginx 做代理（在 Jenkins docker 做代理非常的麻烦）。 #&amp;hellip;">
 <meta name="twitter:image" content="/images/avatar.png">
 </head>
 <body class="flavor-theme">
@@ -133,10 +133,10 @@
     
 <article class="article-container">
   <header class="article-header">
-    <h1 class="article-title">Docker本地挂载目录转容器卷</h1>
+    <h1 class="article-title">Docker 版 Jenkins使用</h1>
     <div class="article-meta">
       
-      <span class="article-meta__item">2026-05-09</span>
+      <span class="article-meta__item">2026-05-11</span>
       
       <span class="article-meta__sep">·</span>
       <span class="article-meta__item">1 分钟阅读</span>
@@ -148,31 +148,37 @@
   
 
   <div class="article-content">
-    <p>之前选择数据挂载的方式都是本地目录直接挂载，但是后面出现了一下文件权限问题，而且本地挂载的话填写挂载路径非常的不灵活，虽然有.env 文件可以填入基础挂载路径，但是还是没有 Docker 自带的容器卷方便，容器卷有个确定就是不能单独挂载文件，只能是目录挂载，而且修改容器卷里面的内容比较麻烦，目前只有官方的 Docker desktop 才能修改容器卷的内容。因此大部分的情况你都可以直接让 Docker 的容器卷接管数据存储，部分特殊情况使用本地目录挂载。所以我需要把之前的本地目录挂载转为容器卷。<br />
-目前也没找到很好的方法只能用临时容器把本地目录的内容 copy 到容器卷当中了。</p>
-<pre><code>docker run --rm -it -v redis:/target_vol -v $(pwd)/redis:/source_data alpine cp -a /source_data/. /target_vol/
-</code></pre>
-<p>结果刚把本地目录迁移到容器卷才发现容器卷的跨物理机迁移非常的不方便，特别是在非 Linux 主机下，因为它们跑的都是虚拟机。而 Docker desktop容器卷导入导出功能需要登录，国内的网络很难登录。</p>
+    <p>Jenkins 是一个非常强大的软件方便部署，之前很少用到，现在我要区分开发环境和测试环境，也只需要用到很少一部分 Jenkins 功能。<br />
+先把 vue 的前端项目从 gitee 上拉取过来（需要安装 gitee 插件）自动打包好（需要有 node 环境），然后通过 publish over ssh 部署到物理机上，用 nginx 做代理（在 Jenkins docker 做代理非常的麻烦）。</p>
+<h1 id="-gitee-plugin">安装 Gitee Plugin</h1>
+<p>Jenkins 这块真的让人迷惑，gitee 插件配置好了，但是后面拉取代码还是要用公钥或者是账户密码的方式，插件只是用来接收 gitee webhook 通知这些的。</p>
+<h1 id="nodejs-">nodeJs 环境配置</h1>
+<p>安装 <code>NodeJS Plugin</code>插件</p>
+<h1 id="publish-on-ssh">publish on ssh</h1>
+<p>安装 <code>Publish Over SSH</code>插件，配置过程 <code>系统管理 -&gt; 系统配置 -&gt; Publish over SSH</code><br />
+<img src="/post-images/1778466296720561000_0.png" alt="" /></p>
+<ol>
+<li>hostname的话 Docker 有专门一个自定义的域名指向物理机</li>
+<li>Remote Directory 在 Windows 下根目录只能是当前登录用户下的用户目录，这点要注意，不然找不到文件了。</li>
+</ol>
 
   </div>
 
   
   <nav class="post-nav">
     
-    <a href="/post/docker-ban-jenkinshi-yong/" class="post-nav-card post-nav-card--prev">
-      
+    <div class="post-nav-card post-nav-card--empty">
       <div class="post-nav-card__body">
         <span class="post-nav-card__label meta-text">上一篇</span>
-        <span class="post-nav-card__title">Docker 版 Jenkins使用</span>
+        <span class="post-nav-card__empty-text">没有上一篇了~</span>
       </div>
-      <span class="post-nav-card__arrow">&larr;</span>
-    </a>
+    </div>
     
     
-    <a href="/post/windows-openssh-deng-lu/" class="post-nav-card post-nav-card--next">
+    <a href="/post/dockerben-di-gua-zai-mu-lu-zhuan-rong-qi-juan/" class="post-nav-card post-nav-card--next">
       <div class="post-nav-card__body">
         <span class="post-nav-card__label meta-text">下一篇</span>
-        <span class="post-nav-card__title">Windows OpenSSH 登录</span>
+        <span class="post-nav-card__title">Docker本地挂载目录转容器卷</span>
       </div>
       
       <span class="post-nav-card__arrow">&rarr;</span>
