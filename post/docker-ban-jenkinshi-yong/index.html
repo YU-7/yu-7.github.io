@@ -35,7 +35,7 @@
 
 <meta name="description" content="Jenkins 是一个非常强大的软件方便部署，之前很少用到，现在我要区分开发环境和测试环境，也只需要用到很少一部分 Jenkins 功能。 先把 vue 的前端项目从 gitee 上拉取过来（需要安装 gitee 插件）自动打包好（需要有 node 环境），然后通过 publish over ssh 部署到物理机上，用 nginx 做代理（在 Jenkins docker 做代理非常的麻烦）。 #&amp;hellip;">
 <link rel="canonical" href="https://yu-7.github.io/post/docker-ban-jenkinshi-yong/">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Docker 版 Jenkins使用","url":"https://yu-7.github.io/post/docker-ban-jenkinshi-yong/","description":"Jenkins 是一个非常强大的软件方便部署，之前很少用到，现在我要区分开发环境和测试环境，也只需要用到很少一部分 Jenkins 功能。 先把 vue 的前端项目从 gitee 上拉取过来（需要安装 gitee 插件）自动打包好（需要有 node 环境），然后通过 publish over ssh 部署到物理机上，用 nginx 做代理（在 Jenkins docker 做代理非常的麻烦）。 #\u0026hellip;","datePublished":"2026-05-11T10:17:44+08:00","dateModified":"2026-05-11T10:49:41+08:00","author":{"@type":"Person","name":"Gridea Pro"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/images/avatar.png"},"name":"Gridea Pro"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Docker 版 Jenkins使用","url":"https://yu-7.github.io/post/docker-ban-jenkinshi-yong/","description":"Jenkins 是一个非常强大的软件方便部署，之前很少用到，现在我要区分开发环境和测试环境，也只需要用到很少一部分 Jenkins 功能。 先把 vue 的前端项目从 gitee 上拉取过来（需要安装 gitee 插件）自动打包好（需要有 node 环境），然后通过 publish over ssh 部署到物理机上，用 nginx 做代理（在 Jenkins docker 做代理非常的麻烦）。 #\u0026hellip;","datePublished":"2026-05-11T10:17:44+08:00","dateModified":"2026-05-20T14:41:50+08:00","author":{"@type":"Person","name":"Gridea Pro"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/images/avatar.png"},"name":"Gridea Pro"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://yu-7.github.io","name":"Gridea Pro","position":1},{"@type":"ListItem","item":"https://yu-7.github.io/post/docker-ban-jenkinshi-yong/","name":"Docker 版 Jenkins使用","position":2}]}</script>
 <meta property="og:title" content="Docker 版 Jenkins使用">
 <meta property="og:description" content="Jenkins 是一个非常强大的软件方便部署，之前很少用到，现在我要区分开发环境和测试环境，也只需要用到很少一部分 Jenkins 功能。 先把 vue 的前端项目从 gitee 上拉取过来（需要安装 gitee 插件）自动打包好（需要有 node 环境），然后通过 publish over ssh 部署到物理机上，用 nginx 做代理（在 Jenkins docker 做代理非常的麻烦）。 #&amp;hellip;">
@@ -139,7 +139,7 @@
       <span class="article-meta__item">2026-05-11</span>
       
       <span class="article-meta__sep">·</span>
-      <span class="article-meta__item">1 分钟阅读</span>
+      <span class="article-meta__item">2 分钟阅读</span>
       
     </div>
     
@@ -161,6 +161,23 @@
 <li>hostname的话 Docker 有专门一个自定义的域名指向物理机</li>
 <li>Remote Directory 在 Windows 下根目录只能是当前登录用户下的用户目录，这点要注意，不然找不到文件了。</li>
 </ol>
+<h1 id="docker">运行docker命令</h1>
+<p>安装插件：https://plugins.jenkins.io/docker-build-step/（容器内部不能直接运行docker命令，像是portainer这种是通过API接口操作的不是直接运行docker xxx 命令的）试了好多个插件都不行还是自己在容器里面安装docker cli 吧，比起插件的展现方式还是直接用cli更直观。</p>
+<pre><code>apt-get update &amp;&amp; \
+apt-get install -y ca-certificates curl gnupg &amp;&amp; \
+install -m 0755 -d /etc/apt/keyrings &amp;&amp; \
+curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc &amp;&amp; \
+chmod a+r /etc/apt/keyrings/docker.asc &amp;&amp; \
+. /etc/os-release &amp;&amp; \
+echo &quot;deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian ${VERSION_CODENAME} stable&quot; &gt; /etc/apt/sources.list.d/docker.list &amp;&amp; \
+apt-get update &amp;&amp; \
+apt-get install -y docker-ce-cli docker-compose-plugin
+</code></pre>
+<p>检验是否安装成功</p>
+<pre><code>docker version
+docker compose version
+docker buildx version
+</code></pre>
 
   </div>
 
