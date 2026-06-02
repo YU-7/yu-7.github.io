@@ -139,6 +139,34 @@
       <div class="memo-item__marker"></div>
       <div class="memo-item__card">
         <div class="memo-item__content article-content">
+          <p>#开发<br />
+公司的新项目选择了mongodb作为数据库，看在了它结构灵活的优点，但是实际开发中还是遇到了不少问题，主要是开发人员也对mongdb不熟悉。<br />
+使用mongoose来自动生成mongodb的时间的时候是UTC时间，而日志上<code>winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' })</code>会转换成服务器时间，导致日志记录的时间和mongodb记录的时间有差值。</p>
+
+        </div>
+        <time class="memo-item__date meta-text"></time>
+      </div>
+    </div>
+    
+    <div class="memo-item">
+      <div class="memo-item__marker"></div>
+      <div class="memo-item__card">
+        <div class="memo-item__content article-content">
+          <p>#开发<br />
+Apifox 登录态<br />
+登录态（Auth）如何处理（Apifox文档）：https://docs.apifox.com/doc-5802184<br />
+查阅文档真是一件麻烦事，但是没办法，现在的接口请求都是需要认证的，每次手动填写太麻烦。<br />
+总的流程是这样，先从验证接口里面，使用“后置操作”，提取环境变量，然后再到待授权的接口“前置操作”，把那个环境变量引入就行。需要注意的是你还是要手动去触发一次授权接口，这样才能把token写入，然后token过期了也不会自动续上。</p>
+
+        </div>
+        <time class="memo-item__date meta-text"></time>
+      </div>
+    </div>
+    
+    <div class="memo-item">
+      <div class="memo-item__marker"></div>
+      <div class="memo-item__card">
+        <div class="memo-item__content article-content">
           <p>#数字生活<br />
 使用Tabbit浏览器也有一段时间了，我也不是什么资深用户，一开始Google浏览器还没有搭载gemini，现在的生活AI能够参与的场景越来越多了，网页的总结翻译什么的确实能帮上忙。而且确实能够看到tabbit有些自己的小巧思的，更好记的快捷键，分组的展示更直观，主打AI功能。</p>
 <p>其他的一些脚本功能，智能标签整理对我来说就是伪需求，脚本功能我根本用不到。智能标签整理，整理分类这件事非常的主观，脑子里把这几个网页分在同一组，然后AI给你整理的结果又不一样，结果你还得重新找一下这些网页被分到什么组里了，破坏了你大脑的工作语境，本来可以使用上下文的，现在上下文被强制刷新了。</p>
