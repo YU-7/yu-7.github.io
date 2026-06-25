@@ -139,6 +139,24 @@
       <div class="memo-item__marker"></div>
       <div class="memo-item__card">
         <div class="memo-item__content article-content">
+          <p>#开发<br />
+macOS上的docker比Windows的WSL更加封闭，连finder都找不到docker的volume路径，就只能通过临时容器来转移了。</p>
+<pre><code class="language-bash">docker run --rm \
+  -v pi-hole:/from \
+  -v ./pihole:/to \
+  alpine \
+  sh -c &quot;cp -a /from/. /to/&quot;
+</code></pre>
+
+        </div>
+        <time class="memo-item__date meta-text"></time>
+      </div>
+    </div>
+    
+    <div class="memo-item">
+      <div class="memo-item__marker"></div>
+      <div class="memo-item__card">
+        <div class="memo-item__content article-content">
           <p>#数字生活<br />
 AdGuardHome docker 版本稳定性有点差，实在忍受不了了换了pi-hole不知道会怎么样。<br />
 pi-hole只有英文界面，但是内存占用小。目前来说我只需要DNS重写这个功能。</p>
